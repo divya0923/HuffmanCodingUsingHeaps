@@ -5,6 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.uf.heap.BinaryHeap;
+import com.uf.heap.FourWayCacheOptimizedHeap;
 import com.uf.heap.HeapNode;
 
 /**
@@ -56,7 +57,30 @@ public class Driver {
 		}
 		
 		System.out.println(binaryHeap.isEmpty());
-		System.out.println(binaryHeap.heapSize());;
+		System.out.println(binaryHeap.heapSize()); 
+		
+		// test 4AryHeap Impl
+		FourWayCacheOptimizedHeap fourWayHeap = new FourWayCacheOptimizedHeap();
+		fourWayHeap.insert(new HeapNode(2,4));
+		fourWayHeap.insert(new HeapNode(2, 3));
+		fourWayHeap.insert(new HeapNode(2, 2));
+		fourWayHeap.insert(new HeapNode(2, 1));
+		fourWayHeap.insert(new HeapNode(2, 0));
+		
+		fourWayHeap.printHeap();
+		
+		try {
+			HeapNode removeMin = fourWayHeap.removeMin();
+			System.out.println(removeMin.getData() + " " + removeMin.getFrequency());
+			fourWayHeap.printHeap();
+			HeapNode removeMin1 = fourWayHeap.removeMin();
+			System.out.println(removeMin1.getData() + " " + removeMin1.getFrequency());
+			fourWayHeap.printHeap();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
 
 }
