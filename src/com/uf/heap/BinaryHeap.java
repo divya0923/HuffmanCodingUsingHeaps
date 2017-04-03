@@ -26,7 +26,6 @@ public class BinaryHeap implements PriorityQueue {
 		binaryHeap.add(node);
 		for(int i = (binaryHeap.size() -1)/2; i >= 0; i--)
 			heapify(i);
-		//bottomUpHeapify(binaryHeap.size() - 1);
 	}
 
 	@Override
@@ -48,10 +47,6 @@ public class BinaryHeap implements PriorityQueue {
 	public int heapSize() {
 		return binaryHeap.size();
 	}
-	
-	/* private int getParent(int index) { 
-		return index == 0 ? -1 : (index - 1) >>> 1;
-	} */
 	
 	private int getRight(int index) {
 		return index * 2 + 2;
@@ -76,15 +71,6 @@ public class BinaryHeap implements PriorityQueue {
 			heapify(minChild);
 		}	
 	}
-	
-	/*private void bottomUpHeapify(int index) {
-		int parentIndex = getParent(index);
-		while(index > 0 && binaryHeap.get(parentIndex).compareTo(binaryHeap.get(index)) >= 0) {
-			swap(parentIndex, index);
-			index = parentIndex;
-			parentIndex = getParent(parentIndex);
-		}
-	}*/
 		
 	private void swap(int index1, int index2) {
 		HeapNode temp = binaryHeap.get(index1);
