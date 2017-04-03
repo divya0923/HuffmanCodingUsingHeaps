@@ -4,7 +4,6 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.uf.heap.BinaryHeap;
 import com.uf.heap.FourWayCacheOptimizedHeap;
 import com.uf.heap.HeapNode;
 
@@ -16,15 +15,17 @@ public class Driver {
 
 	final static Logger logger = Logger.getLogger(Driver.class.getSimpleName());
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Scanner scanner = new Scanner(System.in);
 		String inputFile = scanner.next();
 		scanner.close();
 		logger.log(Level.INFO, "Input file from command line : " + inputFile);
 		HuffmanImplementationUtil.constructFrequencyTable("/Users/dmahendran/Documents/ADS/project/sample1/sample_input_small.txt");
 	
+		//HuffmanImplementationUtil.buildHuffmanTree_BinaryHeap();
+		
 		// test heap nodes compare 
-		HeapNode node = new HeapNode(2,6);
+		/*HeapNode node = new HeapNode(2,6);
 		HeapNode node1 = new HeapNode(2,7);
 		HeapNode node2 = new HeapNode(2,12);
 		HeapNode node3 = new HeapNode(2,10);
@@ -57,7 +58,7 @@ public class Driver {
 		}
 		
 		System.out.println(binaryHeap.isEmpty());
-		System.out.println(binaryHeap.heapSize()); 
+		System.out.println(binaryHeap.heapSize());  */
 		
 		// test 4AryHeap Impl
 		FourWayCacheOptimizedHeap fourWayHeap = new FourWayCacheOptimizedHeap();

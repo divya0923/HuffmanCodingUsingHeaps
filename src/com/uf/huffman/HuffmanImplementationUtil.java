@@ -11,6 +11,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
+import com.uf.heap.BinaryHeap;
+import com.uf.heap.HeapNode;
+
 /**
  * @author dmahendran
  * Utility class with operations to build the Huffman tree
@@ -20,7 +23,6 @@ public class HuffmanImplementationUtil {
 	
 	//Map to store data and its frequency in the input file
 	private static Map<String, Integer> frequencyMap = new HashMap<String, Integer>();
-	
 	
 	/**
 	 * Read from input file and construct the frequency table
@@ -55,11 +57,19 @@ public class HuffmanImplementationUtil {
 		}
 	}
 		
-	public void buildHuffmanTree_BinaryHeap() {
+	public static void buildHuffmanTree_BinaryHeap() throws Exception {
+		BinaryHeap binaryHeap = new BinaryHeap();
 		Iterator<Entry<String, Integer>> iterator = frequencyMap.entrySet().iterator();
 		while(iterator.hasNext()){
 			Entry<String, Integer> next = iterator.next();
-			logger.log(Level.INFO, "key: " + next.getKey() + " frequency: " + next.getValue());
+			binaryHeap.insert(new HeapNode(Integer.parseInt(next.getKey()), next.getValue()));
+		}
+		binaryHeap.printHeap();
+		while(!binaryHeap.isEmpty()){
+			HeapNode removeMin1 = binaryHeap.removeMin();
+			HeapNode removeMin2 = binaryHeap.removeMin();
+			binaryHeap.insert(new HeapNode(Integer.MIN_VALUE, removeMin1.getFrequency() + removeMin2.getFrequency()));
+			
 		}
 	}
 	

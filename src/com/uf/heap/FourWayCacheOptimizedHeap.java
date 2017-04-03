@@ -25,8 +25,8 @@ public class FourWayCacheOptimizedHeap implements PriorityQueue {
 	@Override
 	public void insert(HeapNode node) {
 		fourAryHeap.add(node);
-		for(int i = (fourAryHeap.size() -1)/4; i >= 0; i--)
-			heapify(i);
+		for(int i = (fourAryHeap.size() -1)/4; i >= 0; i--) 
+			heapify(i);	
 	}
 
 	@Override
@@ -59,14 +59,18 @@ public class FourWayCacheOptimizedHeap implements PriorityQueue {
 	}
 	
 	private int getKthChild(int index, int k) {
-		return 4 * index + k;
+		if(index < 3) return -1; // 4*(n-2) + (0 - 3)
+		index = index - 3;
+		return (4 * index + k) + 3;
 	}
 
 	private void heapify(int index) {
+		System.out.println("index: " + index); 
 		int minChild = index, kthChild;
-		for(int i =1; i<= 4; i++){
+		for (int i =1; i<= 4; i++) {
 			kthChild = getKthChild(index, i);
-			if(kthChild < fourAryHeap.size() && fourAryHeap.get(kthChild).compareTo(fourAryHeap.get(index)) <= 0) 
+			System.out.println("kthChild: " + kthChild);
+			if(kthChild > 0 && kthChild < fourAryHeap.size() && fourAryHeap.get(kthChild).compareTo(fourAryHeap.get(index)) <= 0) 
 				minChild = kthChild;
 		}
 		if(minChild != index) {
