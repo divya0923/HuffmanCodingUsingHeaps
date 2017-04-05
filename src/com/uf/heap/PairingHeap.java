@@ -9,7 +9,6 @@ public class PairingHeap implements PriorityQueue {
 	@Override
 	public void insert(HeapNode node) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

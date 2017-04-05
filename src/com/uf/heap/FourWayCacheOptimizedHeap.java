@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  * @author dmahendran
  *
  */
-public class FourWayCacheOptimizedHeap implements PriorityQueue {
+public class FourWayCacheOptimizedHeap implements PriorityQueue{
 	
 	final static Logger logger = Logger.getLogger(FourWayCacheOptimizedHeap.class.getSimpleName());
 	private List<HeapNode> fourAryHeap;
@@ -25,8 +25,15 @@ public class FourWayCacheOptimizedHeap implements PriorityQueue {
 	@Override
 	public void insert(HeapNode node) {
 		fourAryHeap.add(node);
-		for(int i = (fourAryHeap.size() -1)/4; i >= 0; i--) 
-			heapify(i+3);	
+		/*for(int i = (fourAryHeap.size() -1)/4; i >= 0; i--) 
+			heapify(i+3);*/
+		int currentIndex = fourAryHeap.size() - 1;
+		int parentIndex = getParent(currentIndex);
+        while (parentIndex > 2 && (fourAryHeap.get(parentIndex).compareTo(fourAryHeap.get(currentIndex)) == 1)) {
+            swap(parentIndex, currentIndex);
+            currentIndex = parentIndex;
+            parentIndex = getParent(currentIndex);
+        }
 	}
 
 	@Override
@@ -55,14 +62,16 @@ public class FourWayCacheOptimizedHeap implements PriorityQueue {
 		while(iterator.hasNext()) {
 			HeapNode node = iterator.next();
 			if(node != null)
-				logger.log(Level.INFO, "Heap Node: data -> "+ node.getData()  + " fruequency -> " + node.getFrequency());
+				logger.log(Level.INFO, node.toString());
 		}	
 	}
 	
 	private int getKthChild(int index, int k) {
-		//if(index < 3) return -1; // 4*(n-2) + (0 - 3)
-		//index = index - 3;
 		return 4 * (index -2) + k;
+	}
+	
+	private int getParent(int index) {
+		return (index/4)+2;
 	}
 
 	private void heapify(int index) {

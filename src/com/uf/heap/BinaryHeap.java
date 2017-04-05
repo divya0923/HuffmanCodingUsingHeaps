@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * 
  */
 
-public class BinaryHeap implements PriorityQueue {
+public class BinaryHeap implements PriorityQueue{
 	
 	final static Logger logger = Logger.getLogger(BinaryHeap.class.getSimpleName());
 	private List<HeapNode> binaryHeap;
@@ -24,8 +24,15 @@ public class BinaryHeap implements PriorityQueue {
 	@Override
 	public void insert(HeapNode node) {
 		binaryHeap.add(node);
-		for(int i = (binaryHeap.size() -1)/2; i >= 0; i--)
-			heapify(i);
+		/*for(int i = (binaryHeap.size() -1)/2; i >= 0; i--)
+			heapify(i);*/
+		int currentIndex = binaryHeap.size() - 1;
+    	int parentIndex = getParent(currentIndex);
+        while (parentIndex != -1 && (binaryHeap.get(parentIndex).compareTo(binaryHeap.get(currentIndex)) == 1)) {
+            swap(parentIndex, currentIndex);
+            currentIndex = parentIndex;
+            parentIndex = getParent(currentIndex);
+        }
 	}
 
 	@Override
@@ -38,14 +45,18 @@ public class BinaryHeap implements PriorityQueue {
 		return minNode;
 	} 
 
-	@Override
+	//@Override
 	public boolean isEmpty() {
 		return binaryHeap.size() == 0;
 	}
 
-	@Override
+	//@Override
 	public int heapSize() {
 		return binaryHeap.size();
+	}
+	
+	private int getParent(int n) {	
+		return n == 0 ? -1 : (n - 1) >>> 1; 
 	}
 	
 	private int getRight(int index) {
@@ -69,7 +80,7 @@ public class BinaryHeap implements PriorityQueue {
 		if(minChild != index) {
 			swap(minChild, index);
 			heapify(minChild);
-		}	
+		} 	
 	}
 		
 	private void swap(int index1, int index2) {
@@ -83,7 +94,7 @@ public class BinaryHeap implements PriorityQueue {
 		Iterator<HeapNode> iterator = binaryHeap.iterator();
 		while(iterator.hasNext()) {
 			HeapNode node = iterator.next();
-			logger.log(Level.INFO, "Heap Node: data -> "+ node.getData()  + " fruequency -> " + node.getFrequency());
+			logger.log(Level.INFO, node.toString());
 		}
 	}
 	 
