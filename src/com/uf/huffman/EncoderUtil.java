@@ -1,5 +1,4 @@
 package com.uf.huffman;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,11 +17,12 @@ import com.uf.heap.HeapNode;
 
 /**
  * @author dmahendran
- * Utility class with operations to build the Huffman tree
+ * Utility class with helper methods to encode the input file & generate code table
+ * 
  */
 
-public class HuffmanImplementationUtil {
-	final static Logger logger = Logger.getLogger(HuffmanImplementationUtil.class.getSimpleName());
+public class EncoderUtil {
+	final static Logger logger = Logger.getLogger(EncoderUtil.class.getSimpleName());
 	
 	//Map to store data and its frequency in the input file
 	private static Map<String, String> codeTableMap;
@@ -56,7 +56,7 @@ public class HuffmanImplementationUtil {
 			e.printStackTrace();
 		} 
 		return frequencyMap;
-	}
+	} 
 
 	/**
 	 *  Build Huffman tree using Binary Heap
@@ -85,10 +85,6 @@ public class HuffmanImplementationUtil {
 		return null;
 	}
 		
-	public void buildHuffmanTree_PairingHeap() {
-		
-	}
-	
 	/**
 	 * Build Huffman tree using FourAryHeap
 	 * @return
@@ -115,7 +111,7 @@ public class HuffmanImplementationUtil {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Construct code table by traversing root to leaf paths of the Huffman tree
 	 * Generate codes and write to file 
@@ -163,6 +159,7 @@ public class HuffmanImplementationUtil {
 	}
 	
 	/**
+	 * Encode data in the input file using code table and generate encoded file
 	 * @param inputFile
 	 */
 	public static void encodeData(String inputFile) {

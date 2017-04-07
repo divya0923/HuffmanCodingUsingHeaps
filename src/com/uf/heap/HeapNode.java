@@ -11,6 +11,7 @@ public class HeapNode implements Comparable<HeapNode>{
 	private int frequency;
 	private HeapNode left;
 	private HeapNode right;
+	private HeapNode previous;
 	
 	public HeapNode(String data, int frequency){
 		this.data = data;
@@ -87,5 +88,19 @@ public class HeapNode implements Comparable<HeapNode>{
 	 */
 	public void setLeft(HeapNode left) {
 		this.left = left;
+	}
+
+	/**
+	 * @return the previous
+	 */
+	public HeapNode getPrevious() {
+		return previous;
+	}
+
+	/**
+	 * @param previous the previous to set
+	 */
+	public void setPrevious(HeapNode previous) {
+		this.previous = previous;
 	}
 }
